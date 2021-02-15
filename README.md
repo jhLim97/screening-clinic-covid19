@@ -1,1 +1,1 @@
-# screening-clinic-covid19 (21/02/15 작업 진행 중 입니다.)
+# screening-clinic-covid19 (현재 작업 진행 중입니다. 21/02/15 ~)
