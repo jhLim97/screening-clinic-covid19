@@ -1,0 +1,326 @@
+<!doctype html>
+<html lang="en">
+
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="description" content="">
+    <meta name="author" content="Mark Otto, Jacob Thornton, and Bootstrap contributors">
+    <meta name="generator" content="Hugo 0.80.0">
+    <title>코로나19 선별진료소 - 보건복지부</title>
+
+    <link rel="canonical" href="https://getbootstrap.com/docs/5.0/examples/dashboard/">
+
+    <!-- Bootstrap core CSS -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta2/dist/css/bootstrap.min.css" rel="stylesheet"
+        integrity="sha384-BmbxuPwQa2lc/FVzBcNJ7UAyJxM6wuqIj61tLrc4wSX0szH/Ev+nYRRuWlolflfl" crossorigin="anonymous">
+
+    <!-- sweetalert2 -->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/sweetalert2@10.14.1/dist/sweetalert2.min.css">
+
+    <!-- datepicker -->
+    <!-- <link rel="stylesheet"
+        href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datepicker/1.9.0/css/bootstrap-datepicker.min.css"
+        integrity="sha512-mSYUmp1HYZDFaVKK//63EcZq4iFWFjxSL+Z3T/aCt4IO9Cejm03q3NKKYN6pFQzY0SBOr8h+eCIAZHPXcpZaNw=="
+        crossorigin="anonymous" /> -->
+
+    <!-- Favicons -->
+    <link rel="apple-touch-icon" href="/docs/5.0/assets/img/favicons/apple-touch-icon.png" sizes="180x180">
+    <link rel="icon" href="/docs/5.0/assets/img/favicons/favicon-32x32.png" sizes="32x32" type="image/png">
+    <link rel="icon" href="/docs/5.0/assets/img/favicons/favicon-16x16.png" sizes="16x16" type="image/png">
+    <link rel="manifest" href="/docs/5.0/assets/img/favicons/manifest.json">
+    <link rel="mask-icon" href="/docs/5.0/assets/img/favicons/safari-pinned-tab.svg" color="#7952b3">
+    <link rel="icon" href="/docs/5.0/assets/img/favicons/favicon.ico">
+    <meta name="theme-color" content="#7952b3">
+
+    <link rel="icon" href="../public/image/favicon.png"> <!-- 익스플로러 외 다른 브라우저에서 사용할 아이콘 -->
+    <link rel="apple-touch-icon" href="../public/image/favicon.png"> <!-- 스마트폰에서 사용할 아이콘 -->
+
+    <style>
+        .bd-placeholder-img {
+            font-size: 1.125rem;
+            text-anchor: middle;
+            -webkit-user-select: none;
+            -moz-user-select: none;
+            user-select: none;
+        }
+
+        @media (min-width: 768px) {
+            .bd-placeholder-img-lg {
+                font-size: 3.5rem;
+            }
+        }
+    </style>
+
+
+    <!-- Custom styles for this template -->
+    <link href="../public/css/main.css" rel="stylesheet">
+
+    <link rel="stylesheet" href="https://pro.fontawesome.com/releases/v5.10.0/css/all.css"
+        integrity="sha384-AYmEC3Yw5cVb3ZcuHtOA93w35dYTsvhLPVnYs9eStHfGJvOvKxVfELGroGkvsg+p" crossorigin="anonymous" />
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
+</head>
+
+<body>
+    <form method="post" action="/process/listclinic">
+        <header class="nav-left navbar navbar-dark sticky-top flex-md-nowrap p-0 shadow">
+            <a class="nav-left navbar-brand col-md-3 col-lg-2 me-0 px-3" href="#">코로나19 선별진료소</a>
+            <button class="nav-left navbar-toggler position-absolute d-md-none collapsed" type="button"
+                data-bs-toggle="collapse" data-bs-target="#sidebarMenu" aria-controls="sidebarMenu" aria-expanded="false"
+                aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="search-wrap w-100">
+                    <input class="form-control form-control-light" type="text" placeholder="검색어를 입력하세요" aria-label="Search" name='keyword'>
+                    <button type="submit" class="search-btn btn">검&nbsp;색</button>
+            </div>
+            <ul class="navbar-nav px-3">
+                <li class="nav-item text-nowrap">
+                    <a class="nav-link" href="#" style="font-family: fontAwesome;">&#xf041;&nbsp;&nbsp;지도검색 바로가기</a>
+                </li>
+            </ul>
+        </header>
+    </form>
+
+    <div class="container-fluid">
+        <div class="row">
+            <nav id="sidebarMenu" class="col-md-3 col-lg-2 d-md-block bg-light sidebar collapse">
+                <div class="position-sticky pt-3">
+                    <ul class="nav flex-column">
+                        <li class="nav-item li-hover">
+                            <a class="nav-link active" aria-current="page" href="#">
+                                <span data-feather="home"></span>
+                                선별진료소
+                            </a>
+                        </li>
+                        <li class="nav-item li-hover">
+                            <a class="nav-link" href="../public/index_2.html">
+                                <!-- <span data-feather="file"></span> -->
+                                <i class="fas fa-hospital-alt"></i> 국민안심병원
+                            </a>
+                        </li>
+                        <li class="nav-item li-hover">
+                            <a class="nav-link" href="../public/index_3.html">
+                                <!-- <span data-feather="shopping-cart"></span> -->
+                                <i class="fas fa-stethoscope"></i> 코로나 검사 실시기관
+                            </a>
+                        </li>
+                        <li class="nav-item li-hover">
+                            <a class="nav-link" href="https://www.mohw.go.kr/react/popup_200128_4.html">
+                                <!-- <span data-feather="users"></span> -->
+                                <i class="fas fa-ambulance"></i> 자동차 이동형 선별진료소
+                            </a>
+                        </li>
+                        <!-- <li class="nav-item">
+                            <a class="nav-link" href="#">
+                                <span data-feather="bar-chart-2"></span>
+                                Reports
+                            </a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="#">
+                                <span data-feather="layers"></span>
+                                Integrations
+                            </a>
+                        </li> -->
+                    </ul>
+
+                    <h6
+                        class="sidebar-heading d-flex justify-content-between align-items-center px-3 mt-4 mb-1 text-muted">
+                        <span>더보기</span>
+                        <a class="link-secondary" href="#" aria-label="Add a new report">
+                            <span data-feather="plus-circle"></span>
+                        </a>
+                    </h6>
+                    <ul class="nav flex-column mb-2">
+                        <li class="nav-item li-hover">
+                            <a class="nav-link" href="#">
+                                <span data-feather="file-text"></span>
+                                발생동향
+                            </a>
+                        </li>
+                        <li class="nav-item li-hover">
+                            <a class="nav-link" href="#">
+                                <span data-feather="file-text"></span>
+                                뉴스&이슈
+                            </a>
+                        </li>
+                        <li class="nav-item li-hover">
+                            <a class="nav-link" href="#">
+                                <span data-feather="file-text"></span>
+                                피해지원정책
+                            </a>
+                        </li>
+                        <li class="nav-item li-hover">
+                            <a class="nav-link" href="#">
+                                <span data-feather="file-text"></span>
+                                공지사항
+                            </a>
+                        </li>
+                        <li class="nav-item li-hover">
+                            <a class="nav-link" href="#">
+                                <span data-feather="file-text"></span>
+                                사회적 거리두기
+                            </a>
+                        </li>
+                        <li class="nav-item li-hover">
+                            <a class="nav-link" href="#">
+                                <span data-feather="file-text"></span>
+                                마스크 착용
+                            </a>
+                        </li>
+                    </ul>
+                </div>
+            </nav>
+
+            <main class="col-md-9 ms-sm-auto col-lg-10 px-md-4">
+                <div
+                    class="pic d-flex justify-content-between flex-wrap flex-md-nowrap align-items-center pt-3 pb-2 mb-3 border-bottom">
+                    <h1 class="h2" style="font-weight: bold; color: #1d2a3f;">선별진료소 목록</h1>
+                    <div class="btn-toolbar mb-2 mb-md-0">
+                        <!-- <div class="btn-group me-2"> -->
+                            <button style="color: #5e5e5e; margin-right: 1px;" type="button" class="btn btn-link" onclick="swal2();"><i
+                                    class="btn-box fas fa-share-alt"></i></button>
+                            <button type="button" class="btn btn-sm btn-outline-secondary" style="margin-right: 5px;">Info</button>
+                        <!-- </div> -->
+                        <button type="button" class="btn btn-sm btn-outline-secondary dropdown-toggle">
+                            <span data-feather="calendar"></span>
+                            This week
+                        </button>
+                    </div>
+                </div>
+                <p style="font-weight: bold;"><span style="color: #d42c2c;">※</span> "국민안심병원"은 병원 내 감염으로부터 환자를 안전하게 보호하기
+                    위하여 호흡기 환자와 비(非)호흡기 환자를 분리하여 진료하는 곳입니다.<br>
+                    <span style="color: #d42c2c;">※</span> "호흡기전담클리닉"은 감염으로부터 안전한 환경을 갖추고 발열 또는 호흡기 증상의 환자를 진료하는
+                    곳입니다.<br>
+                    <span style="color: #d42c2c;">※</span> "선별진료소"는 코로나19가 의심되거나 역학적 연관성이 있는 사람에게 코로나19 검사를 실시하는 곳입니다.
+                </p>
+
+                <!-- <canvas class="my-4 w-100" id="myChart" width="900" height="380"></canvas> -->
+
+                <p>❖ 검체채취 가능 진료소 | 평일 (월~금) | 토요일 | 일요일 / 공휴일</p>
+                <div class="table-whole table-responsive">
+                    <table class="table table-xl table-bordered">
+                        <thead>
+                            <tr class="table-setting table table-light">
+                                <th>연번</th>
+                                <th>시도</th>
+                                <th>시군구</th>
+                                <th>선별진료소(운영시간)</th>
+                                <th>전화번호</th>
+                                <th>지도</th>
+                            </tr>
+                        </thead>
+                        <tbody>                          
+                            <%
+                                for(var i=0; i<results.length; i++) {
+                                    var sidoNm = results[i]._doc.clinic[0].sidoNm[0];
+                                    var sgguNm = results[i]._doc.clinic[0].sgguNm[0];
+                                    var yadmNm = results[i]._doc.clinic[0].yadmNm[0];
+                                    var telno = results[i]._doc.clinic[0].telno[0];
+                                    var hospTyTpCd = '';
+                                    if(results[i]._doc.clinic[0].hospTyTpCd){
+                                        hospTyTpCd = results[i]._doc.clinic[0].hospTyTpCd[0];
+                                    }
+                            %>
+                            <tr>
+                                <td class="table-light py-5" rowspan="2"><%= i+1%></td>
+                                <td rowspan="2" style="vertical-align: middle;"><%= sidoNm%></td>
+                                <td rowspan="2" style="vertical-align: middle;"><%= sgguNm%></td>
+                                <td style="vertical-align: middle;"><%= yadmNm%></td>
+                                <td rowspan="2" style="vertical-align: middle;"><%= telno%></td>
+                                <td rowspan="2" style="vertical-align: middle;"><button type="button"
+                                    class="table-btn btn"><a href="#">지도</a></button></td>
+                            </tr>
+                            <tr>
+                                <td style="vertical-align: middle;">-비고-</td>
+                            </tr>
+                            <%
+                                }
+                            %>
+                        </tbody>
+                    </table>
+                </div>
+
+                <!-- pagination -->
+                <nav aria-label="Page navigation example" class="pagination justify-content-center">
+                    <ul class="pagination">
+                        <li class="page-item">
+                            <a class="my-page page-link" href="#" aria-label="Previous" style="font-weight: bold;">
+                                <span aria-hidden="true">&laquo;</span>
+                            </a>
+                        </li>
+                        <li class="page-item"><a class="my-page page-link" href="#">1</a></li>
+                        <li class="page-item"><a class="my-page page-link" href="#">2</a></li>
+                        <li class="page-item"><a class="my-page page-link" href="#">3</a></li>
+                        <li class="page-item"><a class="my-page page-link" href="#">4</a></li>
+                        <li class="page-item"><a class="my-page page-link" href="#">5</a></li>
+                        <li class="page-item"><a class="my-page page-link" href="#">6</a></li>
+                        <li class="page-item"><a class="my-page page-link" href="#">7</a></li>
+                        <li class="page-item"><a class="my-page page-link" href="#">8</a></li>
+                        <li class="page-item"><a class="my-page page-link" href="#">9</a></li>
+                        <li class="page-item"><a class="my-page page-link" href="#">10</a></li>
+                        <li class="page-item">
+                            <a class="my-page page-link" href="#" aria-label="Next" style="font-weight: bold;">
+                                <span aria-hidden="true">&raquo;</span>
+                            </a>
+                        </li>
+                    </ul>
+                </nav>
+
+                <!-- footer -->
+                <div class="footer">
+                    <ul class="justify-content-end">
+                        <li>© 2021 Clinic, Inc.</li>
+                        <li><a href="https://www.facebook.com/govkorea/videos/%EC%A0%95%EB%B6%8024%EC%97%90%EC%84%9C-%EC%BD%94%EB%A1%9C%EB%82%9819-%EC%84%A0%EB%B3%84%EC%A7%84%EB%A3%8C%EC%86%8C-30%EC%B4%88%EB%A7%8C%EC%97%90-%EC%B0%BE%EB%8A%94-%EB%B0%A9%EB%B2%95/2766344250299173/"><i class="fab fa-facebook"></i></a></li>
+                        <li><a href="https://twitter.com/happymoj/status/1351034798832312323"><i class="fab fa-twitter"></i></a></li>
+                        <li><a href="https://www.youtube.com/watch?v=3U2XMoDdUZk"><i class="fab fa-youtube"></i></a></li>
+                        <li><a href="https://www.instagram.com/corona_live_official/"><i class="fab fa-instagram"></i></a></li>
+                        <li><a href="https://aws.amazon.com/ko/government-education/government/open-government-solutions/emergency-responses/?open-government-solutions-cards.sort-by=item.additionalFields.sortOrder&open-government-solutions-cards.sort-order=asc"><i class="fab fa-aws"></i></a></li>
+                        <li><a href="https://asymmetrik.com/?s=covid"><i class="fab fa-asymmetrik"></i></a></li>
+                    </ul>
+                </div>
+
+            </main>
+        </div>
+    </div>
+
+
+    <!-- <script src="/docs/5.0/dist/js/bootstrap.bundle.min.js"
+        integrity="sha384-b5kHyXgcpbZJO/tY9Ul7kGkf1S0CWuKcCD38l8YkeH8z8QjE0GmW1gYU5S9FOnJ0" crossorigin="anonymous">
+    </script> -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta2/dist/js/bootstrap.bundle.js"
+        integrity="sha384-b5kHyXgcpbZJO/tY9Ul7kGkf1S0CWuKcCD38l8YkeH8z8QjE0GmW1gYU5S9FOnJ0" crossorigin="anonymous">
+    </script>
+    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.6.0/dist/umd/popper.min.js"
+        integrity="sha384-KsvD1yqQ1/1+IA7gi3P0tyJcT3vR+NdBTt13hSJ2lnve8agRGXTTyNaBYmCR/Nwi" crossorigin="anonymous">
+    </script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta2/dist/js/bootstrap.min.js"
+        integrity="sha384-nsg8ua9HAw1y0W1btsyWgBklPnCUAFLuTMS2G72MMONqmOymq585AcH49TLBQObG" crossorigin="anonymous">
+    </script>
+
+
+    <script src="https://cdn.jsdelivr.net/npm/feather-icons@4.28.0/dist/feather.min.js"
+        integrity="sha384-uO3SXW5IuS1ZpFPKugNNWqTZRRglnUJK6UAZ/gxOX80nxEkN9NcGZTftn6RzhGWE" crossorigin="anonymous">
+    </script>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js@2.9.4/dist/Chart.min.js"
+        integrity="sha384-zNy6FEbO50N+Cg5wap8IKA4M/ZnLJgzc6w2NqACZaK0u0FXfOWRRJOnQtpZun8ha" crossorigin="anonymous">
+    </script>
+
+    <!-- sweetalert2 -->
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@10.14.1/dist/sweetalert2.all.min.js"></script>
+
+    <!-- datepicker -->
+    <!-- <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datepicker/1.9.0/js/bootstrap-datepicker.min.js"
+        integrity="sha512-T/tUfKSV1bihCnd+MxKD0Hm1uBBroVYBOYSk1knyvQ9VyZJpc/ALb4P0r6ubwVPSGB2GvjeoMAJJImBG12TiaQ=="
+        crossorigin="anonymous"></script> -->
+
+    <!-- datepicker사용할 때 jquery도 이용해야하므로 jquery cdn링크 -->
+    <!-- <script src="https://code.jquery.com/jquery-3.5.1.min.js"
+        integrity="sha256-9/aliU8dGd2tb6OSsuzixeV4y/faTqgFtohetphbbj0=" crossorigin="anonymous"></script> -->
+
+
+    <script src="../public/index.js"></script>
+</body>
+
+</html>

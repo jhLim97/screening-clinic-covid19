@@ -14,6 +14,10 @@ var expressErroHandler = require('express-error-handler');
 
 var config = require('./config/config');
 
+var database_loader = require('./database/database_loader');
+var route_loader = require('./router/route_loader');
+var clinic = require('./router/clinic');
+
 // 서버 객체
 var app = express(); 
 
@@ -42,7 +46,7 @@ app.use(expressSession({
 app.use(cors());
 
 var router = express.Router();
-//route_loader.init(app, router);
+route_loader.init(app, router);
 
 // 등록된 라우터 패스가 없는 경우
 var errorHandler = expressErroHandler({
@@ -51,8 +55,6 @@ var errorHandler = expressErroHandler({
     }
 });
 
-var database_loader = require('./database/database_loader');
-var clinic = require('./router/clinic');
 
 app.use(expressErroHandler.httpError(404));
 app.use(errorHandler);
@@ -61,7 +63,5 @@ var server = http.createServer(app).listen(app.get('port'), function() {
     console.log('익스프레스로 웹 서버를 실행함 : ' + app.get('port'));
     
     database_loader.init(app, config);
-
-    clinic.listclinic(database_loader);
-    //clinic.totalNum(database_loader);
+    //clinic.totalNum(database_loader); -> 오전 07시에 업데이트 한 번만 수행
 });
