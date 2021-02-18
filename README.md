@@ -1,4 +1,4 @@
-# screening-clinic-covid19 (21/02/15 ~ 작업 진행 중입니다.)
+# screening-clinic-covid19 (21/02/15 ~ 21/02/18)
 
 Front - 코로나19 선별진료소 홈페이지 제작
  - (21-02-15) -> 선별진료소 메인페이지 중 nav, content, side 구현(부트스트랩 사용, 반응형 웹으로 제작)
