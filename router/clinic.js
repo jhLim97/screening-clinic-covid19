@@ -5,14 +5,12 @@ var request = require('request');
 var parseString = require('xml2js').parseString;
 
 var url = 'http://apis.data.go.kr/B551182/pubReliefHospService/getpubReliefHospList';
-var queryParams = '?' + encodeURIComponent('ServiceKey') + '=발급받은 서비스 키'; /* Service Key*/
+var queryParams = '?' + encodeURIComponent('ServiceKey') + '=발급받은 인증키'; /* Service Key*/
 queryParams += '&' + encodeURIComponent('pageNo') + '=' + encodeURIComponent('1'); /* */
 queryParams += '&' + encodeURIComponent('numOfRows') + '=';/* */
 //queryParams += '&' + encodeURIComponent('spclAdmTyCd') + '=' + encodeURIComponent('A0'); /* */
 
 var queryParamNumOfRows = encodeURIComponent('10');
-
-var totalDataNum;
 
 var totalNum = function(database) {
     request({
@@ -20,13 +18,13 @@ var totalNum = function(database) {
     method:'GET'
 }, function(error, response, body) {
     parseString(body, function(err, r) {
-        totalDataNum = r.response.body[0].totalCount[0];
+        var totalDataNum = r.response.body[0].totalCount[0];
         console.log('총 개수 : ' + totalDataNum);
-        init(database);
+        init(database, totalDataNum);
     });
 })};
 
-var init = function(database) {
+var init = function(database, totalDataNum) {
     request({
     url: url + queryParams + encodeURIComponent(totalDataNum),
     method: 'GET'
@@ -37,6 +35,7 @@ var init = function(database) {
     parseString(body, function(error, r) {
         //console.log(JSON.stringify(r));         
         //var database = req.app.get('database');
+        var data = r.response.body[0].items[0].item;
         data.forEach(function(item, index) {
             addClinic(database, item);
         });
@@ -61,8 +60,8 @@ var addClinic = function(database, item) {
     })
 }
 
-var listclinic = function(req, res) {
-    console.log('/process/listclinic 라우팅 함수 호출됨.');
+var listclinic_seonbyeol = function(req, res) {
+    console.log('/process/listclinic_seonbyeol 라우팅 함수 호출됨.');
     
     // 시도 및 시군구, 선별진료소, 전화번호를 통합한 검색 정보
     var paramKeyword = req.body.keyword || req.query.keyword;
@@ -71,7 +70,7 @@ var listclinic = function(req, res) {
     
     var database = req.app.get('database');
     if(database) {           
-        database.ClinicModel.findByKeyword(paramKeyword, 
+        database.ClinicModel.findByKeyword(paramKeyword, '99',
         function(err, results) {
             if(err) {
                console.log('에러 발생.');
@@ -82,8 +81,6 @@ var listclinic = function(req, res) {
            } 
             
             if(results) {
-                //console.dir(results);
-                
                 var context = {
                     results:results
                 };
@@ -128,7 +125,7 @@ var listclinic_kukmin = function(req, res) {
     
     var database = req.app.get('database');
     if(database) {           
-        database.ClinicModel.findByKeyword(paramKeyword, 
+        database.ClinicModel.findByKeyword(paramKeyword, 'A0',
         function(err, results) {
             if(err) {
                console.log('에러 발생.');
@@ -139,8 +136,6 @@ var listclinic_kukmin = function(req, res) {
            } 
             
             if(results) {
-                //console.dir(results);
-                
                 var context = {
                     results:results
                 };
@@ -175,7 +170,63 @@ var listclinic_kukmin = function(req, res) {
     }
 };
 
+var listclinic_geomsa = function(req, res) {
+    console.log('/process/listclinic_geomsa 라우팅 함수 호출됨.');
+    
+    // 시도 및 시군구, 선별진료소, 전화번호를 통합한 검색 정보
+    var paramKeyword = req.body.keyword || req.query.keyword;
+    
+    console.log('요청 검색어 : ' + paramKeyword);
+    
+    var database = req.app.get('database');
+    if(database) {           
+        database.ClinicModel.findByKeyword(paramKeyword, '97',
+        function(err, results) {
+            if(err) {
+               console.log('에러 발생.');
+               res.writeHead(200, {"Content-Type":"text/html;charset=utf8"});
+               res.write('<h1>에러 발생</h1>');
+               res.end();
+               return;
+           } 
+            
+            if(results) {
+                var context = {
+                    results:results
+                };
+                req.app.render('index_3', context, function(err, html) {
+                    if(err) {
+                        console.error('뷰 렌더링 중 에러 발생 : ' + err.stack);
+                        console.log('에러 발생.');
+
+                        res.writeHead(200, {"Content-Type":"text/html;charset=utf8"});
+                        res.write('<h1>뷰 렌더링 중 에러 발생</h1>');
+                        res.write('<br><p>' + err.stack + '<p>');
+                        res.end();
+                        return;
+                    }
+                
+                    res.writeHead(200, {"Content-Type":"text/html;charset=utf8"});
+                    res.end(html);
+                });
+                
+            } else {
+                console.log('에러 발생.');
+                res.writeHead(200, {"Content-Type":"text/html;charset=utf8"});
+                res.write('<h1>검색 실패.</h1>');
+                res.end();
+            }
+        })
+    } else {
+        console.log('에러 발생.');
+        res.writeHead(200, {"Content-Type":"text/html;charset=utf8"});
+        res.write('<h1>데이터베이스 연결 안됨.</h1>');
+        res.end();
+    }
+};
+
 
 module.exports.totalNum = totalNum;
-module.exports.listclinic = listclinic;
+module.exports.listclinic_seonbyeol = listclinic_seonbyeol;
 module.exports.listclinic_kukmin = listclinic_kukmin;
+module.exports.listclinic_geomsa = listclinic_geomsa;
