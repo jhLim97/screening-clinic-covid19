@@ -21,11 +21,12 @@ Schema.createSchema = function(mongoose) {
     // mongoose에서 직접 메서드 추가 method이용
 
     // mongoose에서 직접 메서드 추가 static이용
-    ClinicSchema.static('findByKeyword', function(keyword, callback) {
+    ClinicSchema.static('findByKeyword', function(keyword, code, callback) {
         var sgguNmAndSidoNm = keyword;
         var telno = '^' + keyword;
         
         return this.find({
+            'clinic.spclAdmTyCd':code,
             $or:[{'clinic.sgguNm':{$regex:sgguNmAndSidoNm}}, {'clinic.telno':{$regex:telno}}, {'clinic.sidoNm':{$regex:sgguNmAndSidoNm}}]
         }, callback)
     });
